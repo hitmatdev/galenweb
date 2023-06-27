@@ -92,7 +92,7 @@ export default function ContactForm() {
           })),
         }),
       });
-
+console.log("Response",response);
       if (response.ok) {
 
         console.log('Form submitted successfully');
