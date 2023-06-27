@@ -29,8 +29,6 @@ export default function ContactForm() {
 
 
 
-<Script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></Script>
-<Script>hbspt.forms.create({ `region: "na1", portalId: "40091071",formId: "f397edc4-817e-43d0-9288-96add51a1554" `});</Script>
 
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
