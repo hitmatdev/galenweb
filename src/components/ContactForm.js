@@ -59,6 +59,18 @@ const submitToHubSpot = async (formData) => {
 export default function ContactForm() {
   const [agreed, setAgreed] = useState(false);
 
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const clearMessages = () => {
+    setSuccessMessage('');
+    setErrorMessage('');
+  };
+
+  const portalId = '40091071';
+  const formId = 'f397edc4-817e-43d0-9288-96add51a1554"';
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -68,7 +80,7 @@ export default function ContactForm() {
 
     try {
       // Submit the form data to HubSpot
-      const response = await fetch('https://api.hsforms.com/submissions/v3/integration/submit/:portalId/:formId', {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,14 +94,23 @@ export default function ContactForm() {
       });
 
       if (response.ok) {
+
         console.log('Form submitted successfully');
+        setSuccessMessage('Form submitted successfully!'); // Set the success message
+        setErrorMessage(''); // Clear the error message
         // Do something on success
       } else {
         console.error('Failed to submit form');
+
+        console.error('Failed to submit form');
+      setSuccessMessage(''); // Clear the success message
+      setErrorMessage('Failed to submit the form. Please try again.');
         // Handle error
       }
     } catch (error) {
       console.error('Error submitting form', error);
+      setSuccessMessage(''); // Clear the success message
+      setErrorMessage('An error occurred while submitting the form. Please try again.'); // Set the error message
       // Handle error
     }
   };
@@ -114,11 +135,44 @@ export default function ContactForm() {
       </div>
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contact Us</h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
-Please provide your information, we will reply you shortly        </p>
+        <p className="mt-2 text-lg leading-8 text-gray-600">Please provide your information, we will reply you shortly        </p>
       </div>
+
+      
       <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
+
+
+      {successMessage && (
+  <div className="bg-green-500 py-2 px-4 mb-4">
+    <p className="text-white">{successMessage}</p>
+    <button
+      className="text-white ml-2"
+      onClick={clearMessages}
+    >
+      Close
+    </button>
+  </div>
+)}
+
+{errorMessage && (
+  <div className="bg-red-500 py-2 px-4 mb-4">
+    <p className="text-white">{errorMessage}</p>
+    <button
+      className="text-white ml-2"
+      onClick={clearMessages}
+    >
+      Close
+    </button>
+  </div>
+)}
+
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+          
+          
+      
+          
+          
+          
           <div>
             <label htmlFor="firstname" className="block text-sm font-semibold leading-6 text-gray-900">
               First name
