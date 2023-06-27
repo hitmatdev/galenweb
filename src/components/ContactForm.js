@@ -15,6 +15,7 @@
 import React, { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@headlessui/react'
+import { Script } from "gatsby"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -25,6 +26,12 @@ export default function ContactForm() {
 
   return (
     <div className="isolate bg-white px-6 py-2 sm:py-12 lg:px-8">
+
+
+
+<Script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></Script>
+<Script>hbspt.forms.create({ `region: "na1", portalId: "40091071",formId: "f397edc4-817e-43d0-9288-96add51a1554" `});</Script>
+
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
