@@ -1,30 +1,13 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 import React, { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@headlessui/react'
 import { Script } from "gatsby"
+import { navigate } from 'gatsby';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
-
-
-
-
 
 export default function ContactForm() {
   const [agreed, setAgreed] = useState(false);
@@ -69,6 +52,8 @@ console.log("Response",response);
         setSuccessMessage('We have recieved your details. We will get back to you shortly.'); // Set the success message
         setErrorMessage(''); // Clear the error message
         // Do something on success
+        navigate('/thank-you'); // Redirect to the thank-you page
+
       } else {
         console.error('Failed to submit form');
 
@@ -109,8 +94,11 @@ console.log("Response",response);
       </div>
 
       
-      <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
+      <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20" name="website-contact-form">
 
+
+     
+     
 
       {successMessage && (
   <div className="bg-green-500 py-2 px-4 mb-4">

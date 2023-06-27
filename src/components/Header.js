@@ -18,7 +18,7 @@ import { Script } from "gatsby"
 const products = [
   { name: 'Data', description: 'Top data sources for healthcare data', href: '/product', icon: CircleStackIcon },
   { name: 'Analytics', description: 'Analytics of various data sources', href: '/product', icon: ChartPieIcon },
-  { name: 'Reports', description: 'How our reports look like', href: '#', icon: DocumentChartBarIcon },
+  { name: 'Reports', description: 'How our reports look like', href: '/product', icon: DocumentChartBarIcon },
   { name: 'Decisions', description: 'How our reports help you in decisions', href: '/product', icon: AdjustmentsHorizontalIcon },
   { name: 'Automations', description: 'Build strategic funnels that will convert', href: '/product', icon: ArrowPathIcon },
 ]
