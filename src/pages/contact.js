@@ -7,7 +7,7 @@ import HubSpot from '../components/HubSpot';
 const ContactPage = () => {
   return (
     <Layout>
-      <HubSpot />
+    
       <ContactForm />
     </Layout>
   );
