@@ -21,8 +21,78 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+
+const submitToHubSpot = async (formData) => {
+  const portalId = '40091071';
+  const formId = 'f397edc4-817e-43d0-9288-96add51a1554"';
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fields: Object.entries(formData).map(([name, value]) => ({
+          name,
+          value,
+        })),
+      }),
+    });
+
+    if (response.ok) {
+      console.log('Form submitted successfully');
+      // Do something on success
+    } else {
+      console.error('Failed to submit form');
+      // Handle error
+    }
+  } catch (error) {
+    console.error('Error submitting form', error);
+    // Handle error
+  }
+};
+
+
+
 export default function ContactForm() {
-  const [agreed, setAgreed] = useState(false)
+  const [agreed, setAgreed] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Prepare form data
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      // Submit the form data to HubSpot
+      const response = await fetch('https://api.hsforms.com/submissions/v3/integration/submit/:portalId/:formId', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: Object.entries(data).map(([name, value]) => ({
+            name,
+            value,
+          })),
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Form submitted successfully');
+        // Do something on success
+      } else {
+        console.error('Failed to submit form');
+        // Handle error
+      }
+    } catch (error) {
+      console.error('Error submitting form', error);
+      // Handle error
+    }
+  };
 
   return (
     <div className="isolate bg-white px-6 py-2 sm:py-12 lg:px-8">
@@ -47,31 +117,31 @@ export default function ContactForm() {
         <p className="mt-2 text-lg leading-8 text-gray-600">
 Please provide your information, we will reply you shortly        </p>
       </div>
-      <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
+      <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="first-name" className="block text-sm font-semibold leading-6 text-gray-900">
+            <label htmlFor="firstname" className="block text-sm font-semibold leading-6 text-gray-900">
               First name
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
-                name="first-name"
-                id="first-name"
+                name="firstname"
+                id="firstname"
                 autoComplete="given-name"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
           <div>
-            <label htmlFor="last-name" className="block text-sm font-semibold leading-6 text-gray-900">
+            <label htmlFor="lastname" className="block text-sm font-semibold leading-6 text-gray-900">
               Last name
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
-                name="last-name"
-                id="last-name"
+                name="lastname"
+                id="lastname"
                 autoComplete="family-name"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
