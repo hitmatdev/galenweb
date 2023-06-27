@@ -22,37 +22,7 @@ function classNames(...classes) {
 }
 
 
-const submitToHubSpot = async (formData) => {
-  const portalId = '40091071';
-  const formId = 'f397edc4-817e-43d0-9288-96add51a1554"';
-  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        fields: Object.entries(formData).map(([name, value]) => ({
-          name,
-          value,
-        })),
-      }),
-    });
-
-    if (response.ok) {
-      console.log('Form submitted successfully');
-      // Do something on success
-    } else {
-      console.error('Failed to submit form');
-      // Handle error
-    }
-  } catch (error) {
-    console.error('Error submitting form', error);
-    // Handle error
-  }
-};
 
 
 
@@ -68,7 +38,7 @@ export default function ContactForm() {
   };
 
   const portalId = '40091071';
-  const formId = 'f397edc4-817e-43d0-9288-96add51a1554"';
+  const formId = 'f397edc4-817e-43d0-9288-96add51a1554';
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
   const handleSubmit = async (event) => {
@@ -96,15 +66,15 @@ console.log("Response",response);
       if (response.ok) {
 
         console.log('Form submitted successfully');
-        setSuccessMessage('Form submitted successfully!'); // Set the success message
+        setSuccessMessage('We have recieved your details. We will get back to you shortly.'); // Set the success message
         setErrorMessage(''); // Clear the error message
         // Do something on success
       } else {
         console.error('Failed to submit form');
 
         console.error('Failed to submit form');
-      setSuccessMessage(''); // Clear the success message
-      setErrorMessage('Failed to submit the form. Please try again.');
+        setSuccessMessage(''); // Clear the success message
+        setErrorMessage('Failed to submit the form. Please try again.');
         // Handle error
       }
     } catch (error) {
@@ -229,38 +199,7 @@ console.log("Response",response);
               />
             </div>
           </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-              Phone number
-            </label>
-            <div className="relative mt-2.5">
-              <div className="absolute inset-y-0 left-0 flex items-center">
-                <label htmlFor="country" className="sr-only">
-                  Country
-                </label>
-                <select
-                  id="country"
-                  name="country"
-                  className="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-                >
-                  <option>US</option>
-                  <option>CA</option>
-                  <option>EU</option>
-                </select>
-                <ChevronDownIcon
-                  className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
-              <input
-                type="tel"
-                name="phone-number"
-                id="phone-number"
-                autoComplete="tel"
-                className="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
+         
           <div className="sm:col-span-2">
             <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
               Message
